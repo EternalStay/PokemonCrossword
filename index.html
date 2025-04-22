@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  <title>PokéCross</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game">
+    <header>
+      <div class="header-container">
+        <div class="header-left">
+          <div title="Archives" class="icon-btn archives nopin">
+            <img src="/icons/archive.svg" alt="Archives" class="icon">
+          </div>
+          <div title="Statistiques" class="icon-btn stats">
+            <img src="/icons/stats.svg" alt="Statistiques" class="icon">
+          </div>
+        </div>
+        <div class="game-title">
+          <div>
+            <div class="title">
+              <div class="letter correct">P</div>
+              <div class="letter correct">O</div>
+              <div class="letter correct">K</div>
+              <div class="letter correct">E</div>
+              <div class="letter partial">C</div>
+              <div class="letter partial">R</div>
+              <div class="letter partial">O</div>
+              <div class="letter partial">S</div>
+              <div class="letter partial">S</div>
+            </div>
+          </div>
+        </div>
+        <!---->
+        <div class="header-right">
+          <div title="Paramètres" class="icon-btn settings">
+            <img src="/icons/settings.svg" alt="Paramètres" class="icon">
+          </div>
+          <div title="Aide" class="icon-btn help">
+            <img src="/icons/help.svg" alt="Aide" class="icon">
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div>
+        <div id="grille"></div>
+        <button id="verifier">Vérifier la grille</button>
+        <div id="message"></div>
+      </div>
+      <div id="indices"></div>
+    </main>
+  </div>  
+  <script type="module" src="script.js"></script>
+</body>
+</html>

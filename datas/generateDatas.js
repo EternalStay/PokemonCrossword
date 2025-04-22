@@ -44,7 +44,6 @@ async function getPokemonData() {
   for (const url of urls) {
     try {
       const species = await fetchData(url);
-      if (!species.is_main_series) continue;
       const names = extractNames(species.names);
       const descriptions = extractMultilang(species.flavor_text_entries);
       data.push({
@@ -134,13 +133,22 @@ async function getAbilityData() {
 
 async function generateJSON() {
   const pokemonData = await getPokemonData();
+  /*
   const itemData = await getItemData();
   const moveData = await getMoveData();
   const abilityData = await getAbilityData();
+  */
 
-  const allData = [...pokemonData, ...itemData, ...moveData, ...abilityData];
+  const allData = [
+    ...pokemonData, 
+    /*
+    ...itemData, 
+    ...moveData, 
+    ...abilityData
+    */
+  ];
 
-  fs.writeFileSync('pokemon_data.json', JSON.stringify(allData, null, 2), 'utf-8');
+  fs.writeFileSync('datas/pokemon_data.json', JSON.stringify(allData, null, 2), 'utf-8');
   console.log('Fichier pokemon_data.json généré avec succès !');
 }
 

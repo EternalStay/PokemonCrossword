@@ -1,0 +1,1266 @@
+html, body {
+  font-family: sans-serif;
+  margin: auto;
+  color: #FFF;
+}
+
+#game header {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  overflow: hidden;
+  background: #1d1d20;
+}
+@media(max-height: 540px) {
+  #game header {
+    height: 40px;
+  }
+}
+#game header .header-container {
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+@media(max-width: 512px) {
+  #game header .header-container {
+    padding: 0 12px;
+    box-sizing: border-box;
+  }
+}
+#game header .header-container .game-title .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#game header .header-container .game-title .title .letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin: 1px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 4px;
+  text-transform: uppercase;
+  color: #fff;
+}
+@media(max-height: 540px) {
+  #game header .header-container .game-title .title .letter {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    margin: 0 2px;
+  }
+}
+@media(max-width: 320px) {
+  #game header .header-container .game-title .title .letter {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    margin: 0 1px;
+  }
+}
+#game header .header-container .game-title .title .letter.correct {
+  background-color: #3eaa42;
+}
+#game header .header-container .game-title .title .letter.partial {
+  background-color: #cd8729;
+}
+#game header .header-container .game-title .title .letter.incorrect {
+  background-color: none;
+  width: 14px;
+}
+#game header .header-container .game-title .title .space {
+  width: 14px
+}
+@media(max-width: 320px) {
+  #game header .header-container .game-title .title .space {
+    width: 10px
+  }
+}
+#game header .header-container .game-title .subtitle {
+  margin-top: .5em;
+  font-size: .8em
+}
+#game header .header-container .archives-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff
+}
+#game header .header-container .archives-selector .archives-date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  font-size: 14px;
+  position: relative
+}
+@media(max-width: 372px) {
+  #game header .header-container .archives-selector .archives-date {
+    font-size: 13px;
+    width: 84px
+  }
+}
+@media(max-width: 320px) {
+  #game header .header-container .archives-selector .archives-date {
+    font-size: 11px;
+    width: 70px
+  }
+}
+#game header .header-container .archives-selector .archives-date .datepicker-container {
+  position: absolute
+}
+#game header .header-container .archives-selector .archives-date .datepicker-container .mx-datepicker {
+  opacity: 0;
+  width: 100%;
+  cursor: pointer
+}
+#game header .header-container .archives-selector .archives-date .datepicker-container .mx-datepicker .mx-datepicker-popup {
+  display: none;
+  margin-top: 12px
+}
+#game header .header-container .header-left,
+#game header .header-container .header-right {
+  display: flex;
+  width: 70px;
+  justify-content: space-between
+}
+@media(max-height: 540px) {
+  #game header .header-container .header-left,
+  #game header .header-container .header-right {
+    width: 62px
+  }
+}
+#game header .header-container .header-right {
+  flex-direction: row-reverse
+}
+#game header .header-container .icon-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: #3a3a3c;
+  border-radius: 5px;
+  border-bottom: 2px solid #2b2b2b;
+  cursor: pointer;
+  transition: all .3s
+}
+@media(max-height: 540px) {
+  #game header .header-container .icon-btn {
+    width: 28px;
+    height: 28px
+  }
+}
+#game header .header-container .icon-btn: hover {
+  background-color: #474748;
+  border-color: #313131
+}
+#game header .header-container .icon-btn: active {
+  background-color: #2b2b2b;
+  border-color: #2b2b2b
+}
+#game header .header-container .icon-btn.pressed {
+  background-color: #3eaa42;
+  border-color: #157d19
+}
+#game header .header-container .icon-btn.disabled {
+  background: none;
+  border: 2px solid #2c2c2c;
+  cursor: default
+}
+#game header .header-container .icon-btn.disabled .icon {
+  opacity: .5
+}
+#game header .header-container .icon-btn .icon {
+  height: 13px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none
+}
+#game header .announcement-cta {
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  position: absolute;
+  bottom: -38px;
+  right: 16px;
+  background: #3eaa42;
+  border-radius: 0 0 1000px 1000px;
+  cursor: pointer;
+  border-bottom: 2px solid #157d19
+}
+#game header .announcement-cta: hover {
+  background-color: #44b848;
+  border-color: #1c9320
+}
+#game header .announcement-cta: active {
+  background-color: #157d19;
+  border-color: #157d19
+}
+@media(max-height: 540px) {
+  #game header .announcement-cta {
+    width: 32px;
+    height: 32px;
+    bottom: -32px
+  }
+}
+#game header .announcement-cta .icon {
+  height: 16px
+}
+#game main {
+  display: flex;
+  background: #0e0e0f;
+  height: 95%;
+  box-sizing: border-box;
+  position: relative;
+}
+@media(max-width: 900px) {
+  #game main {
+    flex-direction: column;
+  }
+}
+
+#game main .fade-enter-active,
+#game main .fade-leave-active {
+  transition: opacity .5s
+}
+#game main .fade-enter,
+#game main .fade-leave-to {
+  opacity: 0
+}
+#game main .fade-leave-active,
+#game main .fadeup-enter-active {
+  transition: opacity .5s
+}
+#game main .fade-leave-to,
+#game main .fadeup-enter {
+  opacity: 0;
+  transform: translateY(10px)
+}
+#game main .error {
+  top: 20px;
+  margin-top: 6px;
+  position: absolute;
+  background: #ebebeb;
+  color: #121213;
+  padding: .5em 1em;
+  border-radius: .5em;
+  font-size: 18px;
+  font-weight: 700;
+  z-index: 10
+}
+#game main .grid {
+  margin-top: auto;
+  margin-bottom: auto
+}
+#game main .grid .attempt {
+  display: flex;
+  animation-duration: .3s;
+  perspective: 800px
+}
+#game main .grid .attempt.shake {
+  animation-name: shake-8f440db8
+}
+#game main .keyboard {
+  margin-bottom: 20px
+}
+@media(max-height: 900px) {
+  #game main .keyboard {
+    margin-bottom: 7px
+  }
+}
+#game main .keyboard .keyboard-line {
+  margin-top: 10px
+}
+#game main .keyboard .keyboard-line: first-child {
+  margin: 0
+}
+@media(max-height: 540px) {
+  #game main .keyboard .keyboard-line {
+    margin-top: 4px
+  }
+}
+#game main .help-modal,
+#game main .modal-backdrop {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0
+}
+#game main .help-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,.7);
+  z-index: 10
+}
+#game main .help-modal .help-modal-content {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  max-width: 450px;
+  width: 90%;
+  max-height: 90%;
+  box-sizing: border-box;
+  padding: 24px;
+  background: #1d1d20;
+  border-radius: 8px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: hsla(0,0%,82.4%,.5019607843137255) hsla(0,0%,100%,0)
+}
+#game main .help-modal .help-modal-content: : -webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 4px
+}
+#game main .help-modal .help-modal-content: : -webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: rgba(0,0,0,.6)
+}
+#game main .help-modal .help-modal-content: : -webkit-scrollbar-thumb: hover {
+  background: #000
+}
+#game main .help-modal .help-modal-content .close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #3a3a3c;
+  border-radius: 5px;
+  border-bottom: 2px solid #2b2b2b;
+  cursor: pointer;
+  transition: all .3s
+}
+#game main .help-modal .help-modal-content .close-btn: hover {
+  background-color: #474748;
+  border-color: #313131
+}
+#game main .help-modal .help-modal-content .close-btn: hover .icon {
+  transform: rotate(90deg)
+}
+#game main .help-modal .help-modal-content .close-btn: active {
+  background-color: #2b2b2b;
+  border-color: #2b2b2b
+}
+#game main .help-modal .help-modal-content .close-btn .icon {
+  height: 10px;
+  transition: all .3s
+}
+#game main .help-modal .help-modal-content h2 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px
+}
+#game main .help-modal .help-modal-content p {
+  font-size: 14px;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  text-align: left;
+  color: #8e8e90
+}
+#game main .help-modal .help-modal-content p: last-child {
+  margin-bottom: 0
+}
+#game main .help-modal .help-modal-content p a {
+  color: #fff;
+  text-decoration: none
+}
+#game main .help-modal .help-modal-content p a: hover {
+  text-decoration: underline
+}
+#game main .help-modal .help-modal-content .help-exemple .help-word {
+  display: flex;
+  margin-top: 24px;
+  margin-bottom: 8px
+}
+#game main .help-modal .help-modal-content .help-exemple .help-word .help-letter-container {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #646464;
+  box-sizing: border-box;
+  margin: 2px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff
+}
+#game main .help-modal .help-modal-content .help-exemple .help-word .help-letter-container.correct {
+  border: none;
+  background: #3eaa42
+}
+#game main .help-modal .help-modal-content .help-exemple .help-word .help-letter-container.correct.color-blind {
+  background: #f5793a
+}
+#game main .help-modal .help-modal-content .help-exemple .help-word .help-letter-container.partial {
+  border: none;
+  background: #cd8729
+}
+#game main .help-modal .help-modal-content .help-exemple .help-word .help-letter-container.partial.color-blind {
+  background: #85c0f9
+}
+#game main .help-modal .help-modal-content .help-exemple .help-word .help-letter-container.incorrect {
+  border: none;
+  background: #3a3a3c
+}
+#game main .help-modal .help-modal-content .help-exemple p span {
+  font-weight: 700
+}
+#game main .help-modal .help-modal-content .help-exemple p span.correct {
+  color: #3eaa42
+}
+#game main .help-modal .help-modal-content .help-exemple p span.correct.color-blind {
+  color: #f5793a
+}
+#game main .help-modal .help-modal-content .help-exemple p span.partial {
+  color: #cd8729
+}
+#game main .help-modal .help-modal-content .help-exemple p span.partial.color-blind {
+  color: #85c0f9
+}
+#game main .endgame-modal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,.7);
+  top: 0;
+  left: 0;
+  z-index: 10
+}
+#game main .endgame-modal .endgame-modal-content {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  max-width: 450px;
+  width: 90%;
+  max-height: 90%;
+  box-sizing: border-box;
+  padding: 24px;
+  background: #1d1d20;
+  border-radius: 8px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: hsla(0,0%,82.4%,.5019607843137255) hsla(0,0%,100%,0)
+}
+#game main .endgame-modal .endgame-modal-content: : -webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 4px
+}
+#game main .endgame-modal .endgame-modal-content: : -webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: rgba(0,0,0,.6)
+}
+#game main .endgame-modal .endgame-modal-content: : -webkit-scrollbar-thumb: hover {
+  background: #000
+}
+#game main .endgame-modal .endgame-modal-content.finished {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0
+}
+#game main .endgame-modal .endgame-modal-content .close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #3a3a3c;
+  border-radius: 5px;
+  border-bottom: 2px solid #2b2b2b;
+  cursor: pointer;
+  transition: all .3s
+}
+#game main .endgame-modal .endgame-modal-content .close-btn: hover {
+  background-color: #474748;
+  border-color: #313131
+}
+#game main .endgame-modal .endgame-modal-content .close-btn: hover .icon {
+  transform: rotate(90deg)
+}
+#game main .endgame-modal .endgame-modal-content .close-btn: active {
+  background-color: #2b2b2b;
+  border-color: #2b2b2b
+}
+#game main .endgame-modal .endgame-modal-content .close-btn .icon {
+  height: 10px;
+  transition: all .3s
+}
+#game main .endgame-modal .endgame-modal-content h2 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px
+}
+#game main .endgame-modal .endgame-modal-content .stats {
+  margin-bottom: 32px;
+  width: 100%
+}
+#game main .endgame-modal .endgame-modal-content .stats .stats-content {
+  display: flex
+}
+@media(max-width: 380px) {
+  #game main .endgame-modal .endgame-modal-content .stats .stats-content {
+    flex-direction: column
+  }
+}
+#game main .endgame-modal .endgame-modal-content .stats .stats-content .stats-line {
+  display: flex;
+  flex: 1
+}
+#game main .endgame-modal .endgame-modal-content .stats .stats-content .stats-line: first-child {
+  margin-right: 8px
+}
+@media(max-width: 380px) {
+  #game main .endgame-modal .endgame-modal-content .stats .stats-content .stats-line: first-child {
+    margin-right: 0;
+    margin-bottom: 8px
+  }
+}
+#game main .endgame-modal .endgame-modal-content .stats .stats-content .stats-line .stats-item {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  margin-right: 8px;
+  background-color: #0e0e0f;
+  border-radius: 6px
+}
+#game main .endgame-modal .endgame-modal-content .stats .stats-content .stats-line .stats-item: last-child {
+  margin-right: 0
+}
+#game main .endgame-modal .endgame-modal-content .stats .stats-content .stats-line .stats-item .stat-item-figure {
+  font-size: 28px;
+  font-weight: 700;
+  color: #3eaa42
+}
+#game main .endgame-modal .endgame-modal-content .stats .stats-content .stats-line .stats-item .stat-item-label {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  font-size: 12px;
+  color: #fff;
+  margin: 0 8px
+}
+#game main .endgame-modal .endgame-modal-content .graph .graph-content,
+#game main .endgame-modal .endgame-modal-content .graph {
+  width: 100%;
+  display: flex;
+  flex-direction: column
+}
+#game main .endgame-modal .endgame-modal-content .graph .graph-content .graph-item {
+  margin-top: 8px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff
+}
+#game main .endgame-modal .endgame-modal-content .graph .graph-content .graph-item: first-child {
+  margin-top: 0
+}
+#game main .endgame-modal .endgame-modal-content .graph .graph-content .graph-item .attempt-number,
+#game main .endgame-modal .endgame-modal-content .graph .graph-content .graph-item .attempt-skull {
+  width: 18px;
+  display: flex;
+  align-items: center
+}
+#game main .endgame-modal .endgame-modal-content .graph .graph-content .graph-item .attempt-skull .icon {
+  height: 10px
+}
+#game main .endgame-modal .endgame-modal-content .graph .graph-content .graph-item .attempt-stat {
+  height: 17px;
+  width: 100%
+}
+#game main .endgame-modal .endgame-modal-content .graph .graph-content .graph-item .attempt-stat .attempt-bar {
+  height: 100%;
+  background: #3a3a3c;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 400;
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 6px;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 28px;
+  border-radius: 3px
+}
+#game main .endgame-modal .endgame-modal-content .graph .graph-content .graph-item .attempt-stat .attempt-bar.best {
+  background: #3eaa42
+}
+#game main .endgame-modal .endgame-modal-content .soluce {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 16px;
+  width: 100%
+}
+#game main .endgame-modal .endgame-modal-content .soluce.special h2 {
+  margin-bottom: 0
+}
+#game main .endgame-modal .endgame-modal-content .soluce.special .special-s {
+  color: #e21c46
+}
+#game main .endgame-modal .endgame-modal-content .soluce.special .ctas .btn.large-btn {
+  background: #e21c46;
+  border-bottom: 2px solid #b90029;
+  padding: 0 16px
+}
+#game main .endgame-modal .endgame-modal-content .soluce.special .ctas .btn.large-btn p {
+  width: 100%
+}
+#game main .endgame-modal .endgame-modal-content .soluce.special .ctas .btn.large-btn.stretched {
+  height: 45px
+}
+#game main .endgame-modal .endgame-modal-content .soluce .subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: hsla(0,0%,100%,.5)
+}
+#game main .endgame-modal .endgame-modal-content .soluce .subtitle.special {
+  margin-bottom: 12px;
+  max-width: 225px
+}
+#game main .endgame-modal .endgame-modal-content .soluce .big {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  max-width: 250px
+}
+#game main .endgame-modal .endgame-modal-content .soluce h2 {
+  margin-bottom: 8px
+}
+#game main .endgame-modal .endgame-modal-content .soluce .ctas {
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+#game main .endgame-modal .endgame-modal-content .soluce .ctas .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 108px;
+  height: 36px;
+  border-radius: 5px;
+  margin: 0 4px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none
+}
+#game main .endgame-modal .endgame-modal-content .soluce .ctas .btn .icon {
+  height: 14px;
+  margin-right: 8px
+}
+#game main .endgame-modal .endgame-modal-content .soluce .ctas .btn.large-btn {
+  background-color: #3a3a3c;
+  border-bottom: 2px solid #2b2b2b;
+  width: 224px;
+  margin-top: 8px
+}
+#game main .endgame-modal .endgame-modal-content .soluce .ctas .btn.large-btn .icon {
+  height: 16px
+}
+#game main .endgame-modal .endgame-modal-content .soluce .ctas .btn.definition-btn {
+  background-color: #3a3a3c;
+  border-bottom: 2px solid #2b2b2b
+}
+#game main .endgame-modal .endgame-modal-content .soluce .ctas .btn.definition-btn: hover {
+  background-color: #474748;
+  border-color: #313131
+}
+#game main .endgame-modal .endgame-modal-content .soluce .ctas .btn.definition-btn: active {
+  background-color: #2b2b2b;
+  border-color: #2b2b2b
+}
+#game main .endgame-modal .endgame-modal-content .soluce .ctas .btn.sh4re-btn-anti-adblock {
+  background-color: #3eaa42;
+  border-bottom: 2px solid #157d19
+}
+#game main .endgame-modal .endgame-modal-content .soluce .ctas .btn.sh4re-btn-anti-adblock: hover {
+  background-color: #44b848;
+  border-color: #1c9320
+}
+#game main .endgame-modal .endgame-modal-content .soluce .ctas .btn.sh4re-btn-anti-adblock: active {
+  background-color: #157d19;
+  border-color: #157d19
+}
+#game main .endgame-modal .endgame-modal-content .soluce .special-logo {
+  margin-top: 16px;
+  height: 36px
+}
+#game main .endgame-modal .endgame-modal-content .soluce .special-logo img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain
+}
+#game main .endgame-modal .modal-footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  max-width: 450px;
+  width: 90%;
+  box-sizing: border-box;
+  padding: 12px;
+  background-color: #141415;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px
+}
+#game main .endgame-modal .modal-footer .next-in {
+  display: flex;
+  font-size: 12px;
+  font-weight: 700;
+  color: hsla(0,0%,100%,.5);
+  margin-bottom: 2px
+}
+#game main .endgame-modal .modal-footer .time {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff
+}
+#game main .settings-modal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,.7);
+  top: 0;
+  left: 0;
+  z-index: 10
+}
+#game main .settings-modal .settings-modal-content {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  max-width: 450px;
+  width: 90%;
+  box-sizing: border-box;
+  padding: 24px;
+  background: #1d1d20;
+  min-height: 420px;
+  max-height: 100%;
+  background: #121213;
+  border-radius: 8px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: hsla(0,0%,82.4%,.5019607843137255) hsla(0,0%,100%,0)
+}
+#game main .settings-modal .settings-modal-content: : -webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 4px
+}
+#game main .settings-modal .settings-modal-content: : -webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: rgba(0,0,0,.6)
+}
+#game main .settings-modal .settings-modal-content: : -webkit-scrollbar-thumb: hover {
+  background: #000
+}
+#game main .settings-modal .settings-modal-content .close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #3a3a3c;
+  border-radius: 5px;
+  border-bottom: 2px solid #2b2b2b;
+  cursor: pointer;
+  transition: all .3s
+}
+#game main .settings-modal .settings-modal-content .close-btn: hover {
+  background-color: #474748;
+  border-color: #313131
+}
+#game main .settings-modal .settings-modal-content .close-btn: hover .icon {
+  transform: rotate(90deg)
+}
+#game main .settings-modal .settings-modal-content .close-btn: active {
+  background-color: #2b2b2b;
+  border-color: #2b2b2b
+}
+#game main .settings-modal .settings-modal-content .close-btn .icon {
+  height: 10px;
+  transition: all .3s
+}
+#game main .settings-modal .settings-modal-content h2 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px
+}
+#game main .settings-modal .settings-modal-content h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #8e8e90
+}
+#game main .settings-modal .settings-modal-content .settings-content {
+  width: 100%
+}
+#game main .settings-modal .settings-modal-content .settings-content .settings-item {
+  width: 100%;
+  padding: 8px 0
+}
+#game main .settings-modal .settings-modal-content .settings-content .settings-item.setting-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+#game main .settings-modal .settings-modal-content .settings-content .settings-item.setting-toggle .toggle-button {
+  background: #3a3a3c;
+  width: 46px;
+  height: 25px;
+  border-radius: 100px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all .3s;
+  position: relative
+}
+#game main .settings-modal .settings-modal-content .settings-content .settings-item.setting-toggle .toggle-button .toggle {
+  background: #fff;
+  width: 17px;
+  height: 17px;
+  border-radius: 100px;
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  transition: all .3s
+}
+#game main .settings-modal .settings-modal-content .settings-content .settings-item.setting-toggle .toggle-button.activated {
+  background: #3eaa42
+}
+#game main .settings-modal .settings-modal-content .settings-content .settings-item.setting-toggle .toggle-button.activated .toggle {
+  transform: translateX(21px)
+}
+#game main .settings-modal .settings-modal-content .settings-content .settings-item.setting-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+#game main .settings-modal .settings-modal-content .settings-content .settings-item.setting-button .btn {
+  cursor: pointer
+}
+#game main .settings-modal .settings-modal-content .settings-content .settings-item.setting-button .buttons {
+  background: #3a3a3c;
+  border-radius: 100px
+}
+#game main .settings-modal .settings-modal-content .settings-content .settings-item.setting-button .buttons button {
+  font-family: Outfit,Avenir,Helvetica,Arial,sans-serif;
+  height: 25px;
+  padding: 0;
+  width: 68px;
+  background: none;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  border: none
+}
+#game main .settings-modal .settings-modal-content .settings-content .settings-item.setting-button .buttons button.selected {
+  background: #3eaa42;
+  border-radius: 100px
+}
+@media(max-width: 450px) {
+  #game main .settings-modal .settings-modal-content .settings-content .settings-item.setting-button .keyboard-buttons {
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px
+  }
+}
+#game main .settings-modal .settings-modal-content .settings-content .credits h2 {
+  text-align: left;
+  margin-top: 32px
+}
+#game main .settings-modal .settings-modal-content .settings-content .credits p {
+  font-size: 14px;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  text-align: left;
+  color: #8e8e90
+}
+#game main .settings-modal .settings-modal-content .settings-content .credits p: last-child {
+  margin-bottom: 0
+}
+#game main .settings-modal .settings-modal-content .settings-content .credits p a {
+  color: #fff;
+  text-decoration: none
+}
+#game main .settings-modal .settings-modal-content .settings-content .credits p a: hover {
+  text-decoration: underline
+}
+#game main .promo-modal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,.7);
+  top: 0;
+  left: 0;
+  z-index: 10
+}
+#game main .promo-modal .promo-modal-content {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  max-width: 450px;
+  width: 90%;
+  box-sizing: border-box;
+  padding: 24px;
+  background: #1d1d20;
+  min-height: 420px;
+  max-height: 100%;
+  background: #121213;
+  border-radius: 8px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: hsla(0,0%,82.4%,.5019607843137255) hsla(0,0%,100%,0)
+}
+#game main .promo-modal .promo-modal-content: : -webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 4px
+}
+#game main .promo-modal .promo-modal-content: : -webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: rgba(0,0,0,.6)
+}
+#game main .promo-modal .promo-modal-content: : -webkit-scrollbar-thumb: hover {
+  background: #000
+}
+#game main .promo-modal .promo-modal-content .close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #3a3a3c;
+  border-radius: 5px;
+  border-bottom: 2px solid #2b2b2b;
+  cursor: pointer;
+  transition: all .3s
+}
+#game main .promo-modal .promo-modal-content .close-btn: hover {
+  background-color: #474748;
+  border-color: #313131
+}
+#game main .promo-modal .promo-modal-content .close-btn: hover .icon {
+  transform: rotate(90deg)
+}
+#game main .promo-modal .promo-modal-content .close-btn: active {
+  background-color: #2b2b2b;
+  border-color: #2b2b2b
+}
+#game main .promo-modal .promo-modal-content .close-btn .icon {
+  height: 10px;
+  transition: all .3s
+}
+#game main .promo-modal .promo-modal-content h2 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 24px
+}
+@media(max-width: 320px) {
+  #game main .promo-modal .promo-modal-content h2 {
+    font-size: 18px
+  }
+}
+#game main .promo-modal .promo-modal-content h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #8e8e90;
+  margin-bottom: 12px
+}
+#game main .promo-modal .promo-modal-content p {
+  font-size: 14px;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  text-align: left;
+  color: #8e8e90
+}
+#game main .promo-modal .promo-modal-content p: last-child {
+  margin-bottom: 0
+}
+#game main .promo-modal .promo-modal-content p b {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700
+}
+#game main .promo-modal .promo-modal-content .promo-images {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 16px;
+  margin-bottom: 16px
+}
+#game main .promo-modal .promo-modal-content .promo-images .promo-image {
+  width: 160px;
+  border-radius: 8px
+}
+@media(max-width: 420px) {
+  #game main .promo-modal .promo-modal-content .promo-images .promo-image {
+    width: 140px
+  }
+}
+@media(max-width: 360px) {
+  #game main .promo-modal .promo-modal-content .promo-images .promo-image {
+    width: 100px
+  }
+}
+#game main .promo-modal .promo-modal-content .ctas {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 16px
+}
+#game main .promo-modal .promo-modal-content .ctas .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 108px;
+  height: 36px;
+  border-radius: 5px;
+  margin: 0 4px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  color: #fff;
+  background-color: #3a3a3c;
+  border-bottom: 2px solid #2b2b2b
+}
+#game main .promo-modal .promo-modal-content .ctas .btn: hover {
+  background-color: #474748;
+  border-color: #313131
+}
+#game main .promo-modal .promo-modal-content .ctas .btn: active {
+  background-color: #2b2b2b;
+  border-color: #2b2b2b
+}
+#game main .promo-modal .promo-modal-content .ctas .btn.discover-btn {
+  background-color: #3eaa42;
+  border-bottom: 2px solid #157d19
+}
+#game main .promo-modal .promo-modal-content .ctas .btn.discover-btn: hover {
+  background-color: #44b848;
+  border-color: #1c9320
+}
+#game main .promo-modal .promo-modal-content .ctas .btn.discover-btn: active {
+  background-color: #157d19;
+  border-color: #157d19
+}
+
+.d-none {
+  display: none;
+}
+
+#parametres div {
+  margin-top: 0.5em;
+}
+
+#grille {
+  border: 1px dashed #aaa;
+  padding: 10px;
+  margin-top: 30px;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+#indices {
+  margin-top: 20px;
+}
+
+#grille {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 20px;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border: 3px solid #2f2f2f;
+  border-radius: 6px;
+  box-sizing: border-box;
+  margin: 2px;
+  transition: transform .1s,background .1s,border .1s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+@media(max-width: 600px) {
+  .cell {
+    width: 25px;
+    height: 25px
+  }
+}
+@media(max-width: 380px) {
+  .cell {
+    width: 20px;
+    height: 20px
+  }
+}
+.cell.has-letter {
+  border-color: #646464
+}
+.cell.selected {
+  border-color: #73adff
+}
+.cell.validated {
+  animation: flip-19728fd0;
+  animation-duration: .5s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards
+}
+.cell.validated .letter {
+  transition: all .1s;
+  transform: rotateX(180deg)
+}
+.cell.validated.color-blind .letter {
+  color: #fff
+}
+.cell.filled input {
+  border-color: #3a3a3c;
+  background: #3a3a3c;
+}
+.cell.correct input {
+  border-color: #3eaa42;
+  background: #3eaa42;
+  animation-name: flip-19728fd0
+}
+.cell.incorrect input {
+  border-color: #f5793a;
+  background: #f5793a
+}
+.cell.no-animation {
+  transition: none;
+  animation: none;
+  transform: none
+}
+.cell.no-animation .letter {
+  transition: none;
+  transform: none
+}
+.cell .letter {
+  width: 100%;
+  height: 100%;
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+  font-size: 12px;
+  position: relative;
+}
+@media(max-height: 700px) {
+  .cell .letter {
+    font-size: 24px
+  }
+}
+@media(max-height: 540px) {
+  .cell .letter {
+    font-size: 20px
+  }
+}
+
+.cell-number {
+  position: absolute;
+  font-size: 8px;
+  color: white;
+  z-index: 1;
+  top: 0;
+  left: 2px;
+}
+.cell-number.down {
+  top: -2px;
+  left: 8px;
+}
+.cell-number.across {
+  top: 8px;
+  left: 0;
+}
+
+
+input.letter {
+  width: 100%;
+  height: 100%;
+  border: none;
+  text-align: center;
+  font-size: 1.2em;
+  background: transparent;
+  outline: none;
+  text-transform: uppercase;
+}
+
+.cell.vide {
+  background-color: #000;
+}
+
+.cell.croisement {
+  background-color: #ccc;
+}
