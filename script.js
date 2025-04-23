@@ -280,8 +280,17 @@ function afficherGrille(layout, mots) {
       }
     });
     
-    messageDiv.innerHTML = toutCorrect
-    ? '<p style="color: green; font-weight: bold;">🎉 Bravo, tout est correct !</p>'
-    : '<p style="color: red;">Il reste des erreurs. Corrige-les et réessaie !</p>';
+    if (toutCorrect) {
+      messageDiv.innerHTML = '<p style="color: green; font-weight: bold;">🎉 Bravo, tout est correct !</p>';
+    } else {
+      messageDiv.innerHTML = '<p style="color: red;">Il reste des erreurs. Corrige-les et réessaie !</p>';
+      setTimeout(() => {
+        document.querySelectorAll('.cell').forEach(cell => {
+          cell.classList.remove('correct');
+          cell.classList.remove('incorrect');
+        });
+        messageDiv.innerHTML = '';
+      }, 5000);
+    }
   };
 }
