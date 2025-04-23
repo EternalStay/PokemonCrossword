@@ -9,8 +9,9 @@ Chaque jour, une grille de mots croisés est générée automatiquement, avec de
 
 ## 🚀 Fonctionnalités à venir
 
-- Récupération des grilles archivées
-- Disponibilité en plusieurs langues
+- Récupération des grilles archivées (bouton Archive)
+- Disponibilité en plusieurs langues (bouton Paramètres)
+- Possibilité d'ajouter les objets, les attaques et les talents (bouton Paramètres)
+- Statistiques (bouton Statistiques)
 - Sauvegarde locale de la progression
-- Statistiques
-- Possibilité d'ajouter les objets, les attaques et les talents
+- Responsive : Sur mobile, mettre en tooltip les indices ?
