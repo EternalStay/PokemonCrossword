@@ -224,7 +224,8 @@ html, body {
 #game main {
   display: flex;
   background: #0e0e0f;
-  height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
+  height: 100%;
   box-sizing: border-box;
   position: relative;
 }
@@ -1121,6 +1122,8 @@ html, body {
   margin-top: 30px;
   margin-left: 1em;
   margin-right: 1em;
+  overflow-x: auto;
+  flex-wrap: wrap;
 }
 
 #indices {
@@ -1156,14 +1159,8 @@ html, body {
 }
 @media(max-width: 600px) {
   .cell {
-    width: 25px;
-    height: 25px
-  }
-}
-@media(max-width: 380px) {
-  .cell {
-    width: 20px;
-    height: 20px
+    width: 30px;
+    height: 30px
   }
 }
 .cell.has-letter {
