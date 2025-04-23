@@ -214,11 +214,12 @@ function afficherGrille(layout, mots) {
   '</ul>';
   
   let derniereCaseActive = null;
+  let derniereDirectionActive = null;
   
   document.querySelectorAll('input.letter').forEach(input => {
-    input.addEventListener('focus', (e) => {
-      if (e.target.value) e.target.select();
-      derniereCaseActive = e.target;
+    input.addEventListener('click', (e) => {
+      derniereCaseActive = null;
+      derniereDirectionActive = null;
     });
     
     input.addEventListener('input', (e) => {
@@ -230,29 +231,29 @@ function afficherGrille(layout, mots) {
       const col = parseInt(current.dataset.col);
       const key = `${row}-${col}`;
       const direction = orientationMap.get(key) || 'across';
-      
+
       let nextInput = null;
       
       if (val.length === 1) {
-        if (direction === 'down') {
-          nextInput = document.querySelector(`input[data-row="${row + 1}"][data-col="${col}"]`);
-        } else {
-          nextInput = document.querySelector(`input[data-row="${row}"][data-col="${col + 1}"]`);
-          
-          let fromTop = false;
-          if (derniereCaseActive) {
-            const prevRow = parseInt(derniereCaseActive.dataset.row);
-            const prevCol = parseInt(derniereCaseActive.dataset.col);
-            fromTop = prevRow === row - 1 && prevCol === col;
+        if (derniereCaseActive == null) {
+          if (direction == 'down') {
+            nextInput = document.querySelector(`input[data-row="${row + 1}"][data-col="${col}"]`);
+          } else {
+            nextInput = document.querySelector(`input[data-row="${row}"][data-col="${col + 1}"]`);
           }
-          
-          if (!nextInput || fromTop) {
-            const below = document.querySelector(`input[data-row="${row + 1}"][data-col="${col}"]`);
-            if (below) nextInput = below;
+          derniereDirectionActive = direction;
+        } else {
+          if (derniereDirectionActive == 'down') {
+            nextInput = document.querySelector(`input[data-row="${row + 1}"][data-col="${col}"]`);
+          } else {
+            nextInput = document.querySelector(`input[data-row="${row}"][data-col="${col + 1}"]`);
           }
         }
         
         if (nextInput) nextInput.focus();
+        nextInput.select();
+
+        derniereCaseActive = current;
       }
     });
   });

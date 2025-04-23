@@ -2,6 +2,7 @@ html, body {
   font-family: sans-serif;
   margin: auto;
   color: #FFF;
+  height: 100%;
 }
 
 #game header {
@@ -223,7 +224,7 @@ html, body {
 #game main {
   display: flex;
   background: #0e0e0f;
-  height: 95%;
+  height: calc(100vh - 60px);
   box-sizing: border-box;
   position: relative;
 }
