@@ -1212,17 +1212,12 @@ html, body {
   align-items: center;
   justify-content: center;
   font-weight: bolder;
-  font-size: 12px;
+  font-size: 18px;
   position: relative;
 }
-@media(max-height: 700px) {
+@media(max-width: 540px) {
   .cell .letter {
-    font-size: 24px
-  }
-}
-@media(max-height: 540px) {
-  .cell .letter {
-    font-size: 20px
+    font-size: 15px
   }
 }
 
