@@ -222,18 +222,40 @@ function afficherGrille(layout, mots) {
       derniereDirectionActive = null;
     });
     
-    input.addEventListener('input', (e) => {
-      const val = e.target.value.toUpperCase();
-      e.target.value = val;
-      
+    input.addEventListener('keydown', (e) => {
       const current = e.target;
       const row = parseInt(current.dataset.row);
       const col = parseInt(current.dataset.col);
       const key = `${row}-${col}`;
       const direction = orientationMap.get(key) || 'across';
+    
+      if (e.key === 'Backspace' || e.key === 'Delete') {
+        current.value = '';
 
+        let prevInput = null;
+        if (derniereDirectionActive === 'down') {
+          prevInput = document.querySelector(`input[data-row="${row - 1}"][data-col="${col}"]`);
+        } else {
+          prevInput = document.querySelector(`input[data-row="${row}"][data-col="${col - 1}"]`);
+        }
+        if (prevInput) prevInput.focus();
+        
+        e.preventDefault();
+      }
+    });
+    
+    input.addEventListener('input', (e) => {
+      const val = e.target.value.toUpperCase();
+      e.target.value = val;
+    
+      const current = e.target;
+      const row = parseInt(current.dataset.row);
+      const col = parseInt(current.dataset.col);
+      const key = `${row}-${col}`;
+      const direction = orientationMap.get(key) || 'across';
+    
       let nextInput = null;
-      
+    
       if (val.length === 1) {
         if (derniereCaseActive == null) {
           if (direction == 'down') {
@@ -249,7 +271,7 @@ function afficherGrille(layout, mots) {
             nextInput = document.querySelector(`input[data-row="${row}"][data-col="${col + 1}"]`);
           }
         }
-        
+    
         if (nextInput) nextInput.focus();
         nextInput.select();
 
