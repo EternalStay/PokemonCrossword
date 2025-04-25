@@ -12,5 +12,8 @@
   "dependencies": {
     "crossword-layout-generator": "^0.1.1",
     "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "purgecss": "^7.0.2"
   }
 }

@@ -316,3 +316,36 @@ function afficherGrille(layout, mots) {
     }
   };
 }
+
+// Ouvre la modale
+document.getElementById('settings').addEventListener('click', () => {
+  document.querySelector('.settings-modal').classList.remove('hidden');
+});
+
+// Ferme la modale (croix)
+document.querySelector('.close-btn').addEventListener('click', () => {
+  document.querySelector('.settings-modal').classList.add('hidden');
+});
+
+// Ferme la modale (backdrop)
+document.querySelector('.modal-backdrop').addEventListener('click', () => {
+  document.querySelector('.settings-modal').classList.add('hidden');
+});
+
+// 🌐 Change de langue
+document.getElementById('language-select').addEventListener('change', (e) => {
+  lang = e.target.value;
+  genererGrilleDuJour();
+});
+
+// 📝 Sélection multiple dans Données
+document.querySelectorAll('.keyboard-buttons button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('selected');
+    // Ici, tu peux filtrer par types sélectionnés
+    const selectedTypes = [...document.querySelectorAll('.keyboard-buttons .selected')]
+      .map(b => b.textContent.toLowerCase());
+    console.log('Types sélectionnés :', selectedTypes);
+    // À intégrer dans ta logique si besoin
+  });
+});

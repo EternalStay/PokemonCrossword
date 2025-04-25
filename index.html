@@ -11,10 +11,10 @@
     <header>
       <div class="header-container">
         <div class="header-left">
-          <div title="Archives" class="icon-btn archives nopin">
+          <div title="Archives" class="icon-btn archives nopin" id="archives">
             <img src="./icons/archive.svg" alt="Archives" class="icon">
           </div>
-          <div title="Statistiques" class="icon-btn stats">
+          <div title="Statistiques" class="icon-btn stats" id="stats">
             <img src="./icons/stats.svg" alt="Statistiques" class="icon">
           </div>
         </div>
@@ -35,12 +35,11 @@
             </div>
           </div>
         </div>
-        <!---->
         <div class="header-right">
-          <div title="Paramètres" class="icon-btn settings">
+          <div title="Paramètres" class="icon-btn settings" id="settings">
             <img src="./icons/settings.svg" alt="Paramètres" class="icon">
           </div>
-          <div title="Aide" class="icon-btn help">
+          <div title="Aide" class="icon-btn help" id="help">
             <img src="./icons/help.svg" alt="Aide" class="icon">
           </div>
         </div>
@@ -57,7 +56,51 @@
         <button id="verifier">Vérifier la grille</button>
         <div id="message"></div>
       </div>
-  </main>
+      
+      <div class="settings-modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="settings-modal-content">
+          <div class="close-btn"><img src="/icons/close.svg" alt="Fermer" class="icon"></div>
+          <h2>Paramètres</h2>
+          <div class="settings-content">
+            <div class="settings-item setting-toggle">
+              <h3>Langue</h3>
+              <select id="language-select">
+                <option value="fr">Français</option>
+                <option value="en">English</option>
+                <option value="de">Deutsch</option>
+                <option value="es">Español</option>
+                <option value="it">Italiano</option>
+              </select>
+            </div>
+            <!--
+            <div class="settings-item setting-toggle">
+              <h3>Mode sombre</h3>
+              <div class="toggle-button activated">
+                <div class="toggle"></div>
+              </div>
+            </div>
+            <div class="settings-item setting-button">
+              <h3>Données</h3>
+              <div class="buttons keyboard-buttons">
+                <button class="selected">Pokémon</button>
+                <button class="">Attaques</button>
+                <button class="">Talents</button>
+                <button class="">Objets</button>
+              </div>
+            </div>
+            -->
+            <!---->
+            <div class="credits">
+              <h2>Crédits</h2>
+              <p>Jeu développé par <a href="https://twitter.com/eternalstay0" target="_blank">@eternalstay0</a>.</p>
+              <p>Données des Pokémon récupérées via l'API de <strong>PokéAPI</strong></p>
+              <p>CSS repris entièrement de <strong>Wordle</strong>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main> 
   </div>  
   <script type="module" src="script.js"></script>
 </body>
