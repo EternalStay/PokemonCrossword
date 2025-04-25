@@ -244,7 +244,7 @@ function afficherGrille(layout, mots) {
         col: input.dataset.col,
         value: input.value
       }));
-      localStorage.setItem(`grille_${lang}`, JSON.stringify(grilleData));
+      localStorage.setItem(`grille_${lang}_${seed}`, JSON.stringify(grilleData));
       
       const current = e.target;
       const row = parseInt(current.dataset.row);
@@ -323,7 +323,7 @@ function afficherGrille(layout, mots) {
     localStorage.removeItem('grille');
   });
   
-  const sauvegarde = JSON.parse(localStorage.getItem(`grille_${lang}`));
+  const sauvegarde = JSON.parse(localStorage.getItem(`grille_${lang}_${seed}`));
   if (sauvegarde) {
     sauvegarde.forEach(item => {
       const input = document.querySelector(`input[data-row="${item.row}"][data-col="${item.col}"]`);
