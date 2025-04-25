@@ -2,17 +2,6 @@ import { generateLayout } from 'https://cdn.skypack.dev/crossword-layout-generat
 
 let lang = 'fr';
 
-/*
-document.getElementById('langue').addEventListener('change', (e) => {
-  lang = e.target.value;
-  genererGrilleDuJour();
-});
-
-document.getElementById('generer').addEventListener('click', () => {
-  genererGrilleDuJour();
-});
-*/
-
 genererGrilleDuJour();
 
 function getDailySeed() {
@@ -228,10 +217,10 @@ function afficherGrille(layout, mots) {
       const col = parseInt(current.dataset.col);
       const key = `${row}-${col}`;
       const direction = orientationMap.get(key) || 'across';
-    
+      
       if (e.key === 'Backspace' || e.key === 'Delete') {
         current.value = '';
-
+        
         let prevInput = null;
         if (derniereDirectionActive === 'down') {
           prevInput = document.querySelector(`input[data-row="${row - 1}"][data-col="${col}"]`);
@@ -247,15 +236,24 @@ function afficherGrille(layout, mots) {
     input.addEventListener('input', (e) => {
       const val = e.target.value.toUpperCase();
       e.target.value = val;
-    
+      
+      const grilleData = [...document.querySelectorAll('input.letter')]
+      .filter(input => input.value)
+      .map(input => ({
+        row: input.dataset.row,
+        col: input.dataset.col,
+        value: input.value
+      }));
+      localStorage.setItem(`grille_${lang}`, JSON.stringify(grilleData));
+      
       const current = e.target;
       const row = parseInt(current.dataset.row);
       const col = parseInt(current.dataset.col);
       const key = `${row}-${col}`;
       const direction = orientationMap.get(key) || 'across';
-    
+      
       let nextInput = null;
-    
+      
       if (val.length === 1) {
         if (derniereCaseActive == null) {
           if (direction == 'down') {
@@ -271,10 +269,10 @@ function afficherGrille(layout, mots) {
             nextInput = document.querySelector(`input[data-row="${row}"][data-col="${col + 1}"]`);
           }
         }
-    
+        
         if (nextInput) nextInput.focus();
         nextInput.select();
-
+        
         derniereCaseActive = current;
       }
     });
@@ -315,37 +313,38 @@ function afficherGrille(layout, mots) {
       }, 5000);
     }
   };
+  
+  document.getElementById('reset-grille').addEventListener('click', () => {
+    document.querySelectorAll('input.letter').forEach(input => {
+      input.value = '';
+      const cell = input.closest('.cell');
+      cell.classList.remove('correct', 'incorrect');
+    });
+    localStorage.removeItem('grille');
+  });
+  
+  const sauvegarde = JSON.parse(localStorage.getItem(`grille_${lang}`));
+  if (sauvegarde) {
+    sauvegarde.forEach(item => {
+      const input = document.querySelector(`input[data-row="${item.row}"][data-col="${item.col}"]`);
+      if (input) input.value = item.value;
+    });
+  }
 }
 
-// Ouvre la modale
 document.getElementById('settings').addEventListener('click', () => {
   document.querySelector('.settings-modal').classList.remove('hidden');
 });
 
-// Ferme la modale (croix)
 document.querySelector('.close-btn').addEventListener('click', () => {
   document.querySelector('.settings-modal').classList.add('hidden');
 });
 
-// Ferme la modale (backdrop)
 document.querySelector('.modal-backdrop').addEventListener('click', () => {
   document.querySelector('.settings-modal').classList.add('hidden');
 });
 
-// 🌐 Change de langue
 document.getElementById('language-select').addEventListener('change', (e) => {
   lang = e.target.value;
   genererGrilleDuJour();
-});
-
-// 📝 Sélection multiple dans Données
-document.querySelectorAll('.keyboard-buttons button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    btn.classList.toggle('selected');
-    // Ici, tu peux filtrer par types sélectionnés
-    const selectedTypes = [...document.querySelectorAll('.keyboard-buttons .selected')]
-      .map(b => b.textContent.toLowerCase());
-    console.log('Types sélectionnés :', selectedTypes);
-    // À intégrer dans ta logique si besoin
-  });
 });
