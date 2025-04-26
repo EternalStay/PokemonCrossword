@@ -1,6 +1,7 @@
 import { generateLayout } from 'https://cdn.skypack.dev/crossword-layout-generator';
 
 let lang = 'fr';
+let seed = getDailySeed();
 
 genererGrilleDuJour();
 
@@ -44,7 +45,6 @@ function genererGrilleDuJour() {
   fetch('datas/pokemon_data.json')
   .then(res => res.json())
   .then(data => {
-    const seed = getDailySeed();
     const rand = seededRandom(seed);
     
     console.log(seed, rand);
@@ -217,21 +217,26 @@ function afficherGrille(layout, mots) {
       const col = parseInt(current.dataset.col);
       const key = `${row}-${col}`;
       const direction = orientationMap.get(key) || 'across';
-      
+    
       if (e.key === 'Backspace' || e.key === 'Delete') {
-        current.value = '';
-        
-        let prevInput = null;
-        if (derniereDirectionActive === 'down') {
-          prevInput = document.querySelector(`input[data-row="${row - 1}"][data-col="${col}"]`);
+        if (current.value) {
+          current.value = '';
         } else {
-          prevInput = document.querySelector(`input[data-row="${row}"][data-col="${col - 1}"]`);
+          let prevInput = null;
+          if (derniereDirectionActive === 'down') {
+            prevInput = document.querySelector(`input[data-row="${row - 1}"][data-col="${col}"]`);
+          } else {
+            prevInput = document.querySelector(`input[data-row="${row}"][data-col="${col - 1}"]`);
+          }
+          if (prevInput) {
+            prevInput.focus();
+            prevInput.select();
+          }
         }
-        if (prevInput) prevInput.focus();
-        
         e.preventDefault();
       }
     });
+    
     
     input.addEventListener('input', (e) => {
       const val = e.target.value.toUpperCase();
