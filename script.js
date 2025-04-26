@@ -1,13 +1,111 @@
 import { generateLayout } from 'https://cdn.skypack.dev/crossword-layout-generator';
 
-let lang = 'fr';
-let seed = getDailySeed();
 
+
+/* Variables par défaut pour la création de la grille */
+let currentLang = 'fr';
+let currentDate = new Date();
+let seed = getDailySeed();
 genererGrilleDuJour();
 
+
+
+/**
+ * Gestion des grilles archivées
+ */
+
+const archiveBtn = document.getElementById('archives');
+const archiveDate = document.getElementById('archives-date');
+const archiveDateInput = document.getElementById('archive-date');
+const archivePrevious = document.getElementById('archive-previous');
+const archiveNext = document.getElementById('archive-next');
+const title = document.getElementById('title');
+
+// Click sur le bouton pour accéder aux grilles archivées
+archiveBtn.addEventListener('click', () => {
+  const isActive = archiveDate.classList.toggle('d-none');
+  title.classList.toggle('d-none');
+
+  if (!isActive) currentDate.setDate(currentDate.getDate() - 1);
+  else currentDate = new Date();
+
+  updateDateInput();
+  genererGrilleDuJour();
+});
+
+// Click sur le jour d'avant
+archivePrevious.addEventListener('click', () => {
+  currentDate.setDate(currentDate.getDate() - 1);
+
+  updateDateInput();
+  genererGrilleDuJour();
+});
+
+// Click sur le jour d'après
+archiveNext.addEventListener('click', () => {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  const nextDate = new Date(currentDate);
+  nextDate.setDate(nextDate.getDate() + 1);
+
+  if (nextDate.toDateString() === today.toDateString()) {
+    return;
+  }
+
+  currentDate = nextDate;
+  updateDateInput();
+  genererGrilleDuJour();
+});
+
+function updateDateInput() {
+  const yyyy = currentDate.getFullYear();
+  const mm = String(currentDate.getMonth() + 1).padStart(2, '0');
+  const dd = String(currentDate.getDate()).padStart(2, '0');
+  archiveDateInput.innerHTML = `${dd}/${mm}/${yyyy}`;
+  updateButtons();
+}
+
+function updateButtons() {
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  yesterday.setHours(0,0,0,0);
+  const isYesterday = currentDate.toDateString() === yesterday.toDateString();
+  
+  if (isYesterday) archiveNext.classList.add('disabled');
+  else archiveNext.classList.remove('disabled');
+}
+
+
+
+/**
+ * Gestion des paramètres 
+ */
+const settingsBtn = document.getElementById('settings');
+const settingsModal = document.getElementById('settings-modal');
+const settingsModalClose = document.querySelector('.close-btn');
+const settingsModalBackdrop = document.querySelector('.modal-backdrop');
+const settingsLanguage = document.getElementById('language-select');
+
+settingsBtn.addEventListener('click', () => { settingsModal.classList.remove('hidden'); });
+settingsModalClose.addEventListener('click', () => { settingsModal.classList.add('hidden'); });
+settingsModalBackdrop.addEventListener('click', () => { settingsModal.classList.add('hidden'); });
+settingsLanguage.addEventListener('change', (e) => {
+  currentLang = e.target.value;
+  genererGrilleDuJour();
+});
+
+
+
+
+
+
+
+/* Fonction pour récupérer la Seed quotidienne */
 function getDailySeed() {
-  const dateInput = document.getElementById('date');
-  const dateStr = dateInput ? dateInput.value : new Date().toISOString().slice(0, 10);
+  const dateStr = currentDate.toISOString().slice(0, 10);
+  console.log(dateStr);
   
   let hash = 0;
   for (let i = 0; i < dateStr.length; i++) {
@@ -16,6 +114,7 @@ function getDailySeed() {
   return Math.abs(hash);
 }
 
+/* Valeur de seed random */
 function seededRandom(seed) {
   return function () {
     seed = (seed * 9301 + 49297) % 233280;
@@ -23,14 +122,17 @@ function seededRandom(seed) {
   };
 }
 
+/* Récupère un élément au hasard du tableau */
 function getRandomElement(arr, randFn) {
   return arr[Math.floor(randFn() * arr.length)];
 }
 
+/* Retire les caractères spéciaux d'un mot */
 function nettoyerMot(mot) {
   return mot.toUpperCase().replace(/[\ :-\s]/g, '');
 }
 
+/* Retire les caractères accentués d'un mot */
 function sansAccent(str) {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, '');
 }
@@ -41,19 +143,19 @@ function partageLettre(mot, selection) {
   );
 }
 
+/* Génération de la grille du jour */
 function genererGrilleDuJour() {
   fetch('datas/pokemon_data.json')
   .then(res => res.json())
   .then(data => {
+    seed = getDailySeed();
     const rand = seededRandom(seed);
-    
-    console.log(seed, rand);
     
     const filteredData = data.filter(entry =>
       entry.type === 'pokemon' &&
-      entry.mot?.[lang] &&
-      Array.isArray(entry.descriptions?.[lang]) &&
-      entry.descriptions[lang].length > 0
+      entry.mot?.[currentLang] &&
+      Array.isArray(entry.descriptions?.[currentLang]) &&
+      entry.descriptions[currentLang].length > 0
     );
     
     if (filteredData.length === 0) {
@@ -72,8 +174,8 @@ function genererGrilleDuJour() {
       let firstEntry = null;
       while (!firstEntry) {
         const entry = filteredData[Math.floor(rand() * filteredData.length)];
-        const mot = nettoyerMot(entry.mot[lang]);
-        const desc = entry.descriptions[lang];
+        const mot = nettoyerMot(entry.mot[currentLang]);
+        const desc = entry.descriptions[currentLang];
         if (mot && desc?.length) {
           firstEntry = {
             answer: mot,
@@ -87,8 +189,8 @@ function genererGrilleDuJour() {
       while (selection.length < 8) {
         const candidats = filteredData
         .map(entry => {
-          const mot = nettoyerMot(entry.mot[lang]);
-          const desc = entry.descriptions[lang];
+          const mot = nettoyerMot(entry.mot[currentLang]);
+          const desc = entry.descriptions[currentLang];
           return { mot, desc };
         })
         .filter(entry =>
@@ -215,9 +317,7 @@ function afficherGrille(layout, mots) {
       const current = e.target;
       const row = parseInt(current.dataset.row);
       const col = parseInt(current.dataset.col);
-      const key = `${row}-${col}`;
-      const direction = orientationMap.get(key) || 'across';
-    
+      
       if (e.key === 'Backspace' || e.key === 'Delete') {
         if (current.value) {
           current.value = '';
@@ -249,7 +349,7 @@ function afficherGrille(layout, mots) {
         col: input.dataset.col,
         value: input.value
       }));
-      localStorage.setItem(`grille_${lang}_${seed}`, JSON.stringify(grilleData));
+      localStorage.setItem(`grille_${currentLang}_${seed}`, JSON.stringify(grilleData));
       
       const current = e.target;
       const row = parseInt(current.dataset.row);
@@ -328,7 +428,7 @@ function afficherGrille(layout, mots) {
     localStorage.removeItem('grille');
   });
   
-  const sauvegarde = JSON.parse(localStorage.getItem(`grille_${lang}_${seed}`));
+  const sauvegarde = JSON.parse(localStorage.getItem(`grille_${currentLang}_${seed}`));
   if (sauvegarde) {
     sauvegarde.forEach(item => {
       const input = document.querySelector(`input[data-row="${item.row}"][data-col="${item.col}"]`);
@@ -337,19 +437,3 @@ function afficherGrille(layout, mots) {
   }
 }
 
-document.getElementById('settings').addEventListener('click', () => {
-  document.querySelector('.settings-modal').classList.remove('hidden');
-});
-
-document.querySelector('.close-btn').addEventListener('click', () => {
-  document.querySelector('.settings-modal').classList.add('hidden');
-});
-
-document.querySelector('.modal-backdrop').addEventListener('click', () => {
-  document.querySelector('.settings-modal').classList.add('hidden');
-});
-
-document.getElementById('language-select').addEventListener('change', (e) => {
-  lang = e.target.value;
-  genererGrilleDuJour();
-});
